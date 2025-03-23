@@ -13,6 +13,11 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as UnitsIndexImport } from './routes/units/index'
+import { Route as UnitsNumbersImport } from './routes/units/numbers'
+import { Route as UnitsIntroImport } from './routes/units/intro'
+import { Route as UnitsColoursImport } from './routes/units/colours'
+import { Route as UnitsAlphabetsImport } from './routes/units/alphabets'
 
 // Create/Update Routes
 
@@ -25,6 +30,36 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnitsIndexRoute = UnitsIndexImport.update({
+  id: '/units/',
+  path: '/units/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnitsNumbersRoute = UnitsNumbersImport.update({
+  id: '/units/numbers',
+  path: '/units/numbers',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnitsIntroRoute = UnitsIntroImport.update({
+  id: '/units/intro',
+  path: '/units/intro',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnitsColoursRoute = UnitsColoursImport.update({
+  id: '/units/colours',
+  path: '/units/colours',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnitsAlphabetsRoute = UnitsAlphabetsImport.update({
+  id: '/units/alphabets',
+  path: '/units/alphabets',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,6 +81,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/units/alphabets': {
+      id: '/units/alphabets'
+      path: '/units/alphabets'
+      fullPath: '/units/alphabets'
+      preLoaderRoute: typeof UnitsAlphabetsImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/colours': {
+      id: '/units/colours'
+      path: '/units/colours'
+      fullPath: '/units/colours'
+      preLoaderRoute: typeof UnitsColoursImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/intro': {
+      id: '/units/intro'
+      path: '/units/intro'
+      fullPath: '/units/intro'
+      preLoaderRoute: typeof UnitsIntroImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/numbers': {
+      id: '/units/numbers'
+      path: '/units/numbers'
+      fullPath: '/units/numbers'
+      preLoaderRoute: typeof UnitsNumbersImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/': {
+      id: '/units/'
+      path: '/units'
+      fullPath: '/units'
+      preLoaderRoute: typeof UnitsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +124,83 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/units/alphabets': typeof UnitsAlphabetsRoute
+  '/units/colours': typeof UnitsColoursRoute
+  '/units/intro': typeof UnitsIntroRoute
+  '/units/numbers': typeof UnitsNumbersRoute
+  '/units': typeof UnitsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/units/alphabets': typeof UnitsAlphabetsRoute
+  '/units/colours': typeof UnitsColoursRoute
+  '/units/intro': typeof UnitsIntroRoute
+  '/units/numbers': typeof UnitsNumbersRoute
+  '/units': typeof UnitsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/units/alphabets': typeof UnitsAlphabetsRoute
+  '/units/colours': typeof UnitsColoursRoute
+  '/units/intro': typeof UnitsIntroRoute
+  '/units/numbers': typeof UnitsNumbersRoute
+  '/units/': typeof UnitsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/units/alphabets'
+    | '/units/colours'
+    | '/units/intro'
+    | '/units/numbers'
+    | '/units'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/about'
+    | '/units/alphabets'
+    | '/units/colours'
+    | '/units/intro'
+    | '/units/numbers'
+    | '/units'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/units/alphabets'
+    | '/units/colours'
+    | '/units/intro'
+    | '/units/numbers'
+    | '/units/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  UnitsAlphabetsRoute: typeof UnitsAlphabetsRoute
+  UnitsColoursRoute: typeof UnitsColoursRoute
+  UnitsIntroRoute: typeof UnitsIntroRoute
+  UnitsNumbersRoute: typeof UnitsNumbersRoute
+  UnitsIndexRoute: typeof UnitsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  UnitsAlphabetsRoute: UnitsAlphabetsRoute,
+  UnitsColoursRoute: UnitsColoursRoute,
+  UnitsIntroRoute: UnitsIntroRoute,
+  UnitsNumbersRoute: UnitsNumbersRoute,
+  UnitsIndexRoute: UnitsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +214,12 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/units/alphabets",
+        "/units/colours",
+        "/units/intro",
+        "/units/numbers",
+        "/units/"
       ]
     },
     "/": {
@@ -105,6 +227,21 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/units/alphabets": {
+      "filePath": "units/alphabets.tsx"
+    },
+    "/units/colours": {
+      "filePath": "units/colours.tsx"
+    },
+    "/units/intro": {
+      "filePath": "units/intro.tsx"
+    },
+    "/units/numbers": {
+      "filePath": "units/numbers.tsx"
+    },
+    "/units/": {
+      "filePath": "units/index.tsx"
     }
   }
 }

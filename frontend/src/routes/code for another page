@@ -1,0 +1,86 @@
+function Alphabet() {
+  const [recording, setRecording] = useState(false);
+  const [translatedText, setTranslatedText] = useState("A");
+  const [isCorrect, setIsCorrect] = useState(true);
+  const [showCorrectDemo, setShowCorrectDemo] = useState(false);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          videoRef.current!.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing webcam:", err);
+        });
+    }
+  }, []);
+
+  const handleRecordingToggle = () => {
+    if (!recording) {
+      setRecording(true);
+      setShowCorrectDemo(false);
+    } else {
+      setRecording(false);
+      const correct = Math.random() > 0.5;
+      setIsCorrect(correct);
+      if (!correct) {
+        setTimeout(() => {
+          setShowCorrectDemo(true);
+        }, 1000);
+      }
+    }
+  };
+
+  return (
+    <div className="p-4 space-y-4">
+      <h1 className="text-2xl font-bold">Unit 1: Learning Alphabet</h1>
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* Recording Section */}
+        <div className="flex-1">
+          {/* Webcam preview */}
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            className="w-full border rounded"
+          />
+          <button
+            onClick={handleRecordingToggle}
+            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+          >
+            {recording ? "Stop Recording" : "Start Recording"}
+          </button>
+        </div>
+        {/* Feedback Section */}
+        <div className="flex-1">
+          {isCorrect ? (
+            <div className="p-4 border rounded flex items-center justify-between">
+              <span className="text-xl">{translatedText}</span>
+              <span className="text-green-500 text-2xl">✓</span>
+            </div>
+          ) : showCorrectDemo ? (
+            <div className="p-4 border rounded flex flex-col items-center">
+              <span className="text-red-500 text-2xl mb-2">✕</span>
+              <video
+                src="/path/to/correct-demo.mp4"
+                controls
+                className="w-full border rounded"
+              />
+            </div>
+          ) : (
+            <div className="p-4 border rounded flex items-center justify-between">
+              <span className="text-xl">{translatedText}</span>
+              <span className="text-red-500 text-2xl">✕</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Alphabet;
