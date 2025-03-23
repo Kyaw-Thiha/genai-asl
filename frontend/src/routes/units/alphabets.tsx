@@ -6,17 +6,24 @@ export const Route = createFileRoute("/units/alphabets")({
 });
 
 function Alphabets() {
+  // Recording and recorded video state.
   const [recording, setRecording] = useState(false);
   const [recordedVideoUrl, setRecordedVideoUrl] = useState("");
 
-  // Refs for the MediaRecorder and collected data
+  // State for the video comparison process.
+  const [loadingComparison, setLoadingComparison] = useState(false);
+  // comparisonResult: true for correct, false for incorrect, null if not yet compared.
+  const [comparisonResult, setComparisonResult] = useState<null | boolean>(
+    null
+  );
+  const [showDemoVideo, setShowDemoVideo] = useState(false);
+
+  // Refs for MediaRecorder and video elements.
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordedChunksRef = useRef<Blob[]>([]);
-
-  // Ref for the user's video preview element
   const videoPreviewRef = useRef<HTMLVideoElement>(null);
 
-  // Request the user's webcam stream on mount
+  // Request webcam access on component mount.
   useEffect(() => {
     if (videoPreviewRef.current) {
       navigator.mediaDevices
@@ -30,7 +37,7 @@ function Alphabets() {
     }
   }, []);
 
-  // Start recording by creating a MediaRecorder and starting it
+  // Start recording using MediaRecorder.
   const startRecording = () => {
     setRecording(true);
     recordedChunksRef.current = [];
@@ -53,17 +60,40 @@ function Alphabets() {
     mediaRecorder.start();
   };
 
-  // Stop recording and trigger the onstop handler
+  // Stop recording.
   const stopRecording = () => {
     setRecording(false);
     mediaRecorderRef.current?.stop();
   };
 
-  // Handle submission (for now, simply log the recorded video URL)
+  // Handle submission: show a loading screen, then simulate comparison and display result.
   const handleSubmit = () => {
-    console.log("Submitted video URL:", recordedVideoUrl);
-    alert("Video submitted!");
+    // Reset previous comparison results.
+    setComparisonResult(null);
+    setShowDemoVideo(false);
+    // Show the full-screen loading screen.
+    setLoadingComparison(true);
+
+    // Simulate a delay (e.g., 3 seconds) to compare the videos.
+    setTimeout(() => {
+      setLoadingComparison(false);
+      // Simulate a comparison result (replace this with your actual API call later).
+      const result = Math.random() > 0.5;
+      setComparisonResult(result);
+      if (!result) {
+        setShowDemoVideo(true);
+      }
+    }, 3000);
   };
+
+  // If loadingComparison is true, render a full-screen loading screen.
+  if (loadingComparison) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+        <p className="text-xl font-bold">Comparing videos, please wait...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 space-y-4">
@@ -87,7 +117,7 @@ function Alphabets() {
             {!recording ? (
               <button
                 onClick={startRecording}
-                className="px-4 py-2 bg-blue-500  font-bold rounded"
+                className="px-4 py-2 bg-blue-500 font-bold rounded"
               >
                 Start Recording
               </button>
@@ -112,14 +142,33 @@ function Alphabets() {
           )}
         </div>
       </div>
-      {/* Submit Button */}
-      <div className="flex justify-center mt-4">
+      {/* Submit Button and Comparison Feedback */}
+      <div className="flex flex-col items-center mt-4">
         <button
           onClick={handleSubmit}
           className="px-6 py-3 bg-blue-500  font-bold rounded"
         >
           Submit Your Video
         </button>
+        {comparisonResult !== null && (
+          <div className="mt-4 flex flex-col items-center">
+            {comparisonResult ? (
+              <div className="text-green-500 text-4xl">✓</div>
+            ) : (
+              <div className="text-red-500 text-4xl">✕</div>
+            )}
+            {showDemoVideo && (
+              <div className="mt-4 border p-4 rounded">
+                <h3 className="font-semibold mb-2">Correct Demo:</h3>
+                <video
+                  src="/correct-demo.mp4"
+                  controls
+                  className="w-full rounded border"
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
