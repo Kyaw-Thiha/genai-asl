@@ -1,7 +1,7 @@
 import HolisticTracker from '@/components/HollisticComponent'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/units/intro/hello')({
+export const Route = createFileRoute('/units/intro/please')({
   component: RouteComponent,
 })
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 // import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 import Webcam from "react-webcam";
 import { createFileRoute } from '@tanstack/react-router'
@@ -12,7 +12,7 @@ import {
 
 
 import { Camera } from "@mediapipe/camera_utils";
-import { FACEMESH_TESSELATION, HAND_CONNECTIONS, POSE_CONNECTIONS, Holistic, Results } from '@mediapipe/holistic';
+import {  HAND_CONNECTIONS, POSE_CONNECTIONS, Holistic, Results } from '@mediapipe/holistic';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 
 interface Landmark {
@@ -41,51 +41,51 @@ const HolisticTracker: React.FC<HolisticTrackerProps> = (props) => {
   const waitFrame = 2;
   let sameFrameCount = 0;
 
-  let matchCounter = 0;
+  // let matchCounter = 0;
 
 
   /*
    * Converts MediaPipe Holistic landmarks into the required frame format.
    */
-  const convertLandmarks = (holisticLandmarks: any): Frame => {
-    return {
-      pose: holisticLandmarks.poseLandmarks || [],
-      left: holisticLandmarks.leftHandLandmarks || [],
-      right: holisticLandmarks.rightHandLandmarks || [],
-    };
-  };
+  // const convertLandmarks = (holisticLandmarks: any): Frame => {
+  //   return {
+  //     pose: holisticLandmarks.poseLandmarks || [],
+  //     left: holisticLandmarks.leftHandLandmarks || [],
+  //     right: holisticLandmarks.rightHandLandmarks || [],
+  //   };
+  // };
 
   /**
    * Calculates the Euclidean distance between two sets of landmarks.
    */
-  const calculateDistance = (landmarks1: Landmark[], landmarks2: Landmark[]): number => {
-    if (landmarks1.length !== landmarks2.length) return Infinity;
-    return landmarks1.reduce((sum, l1, i) => {
-      const l2 = landmarks2[i];
-      return sum + Math.sqrt((l1.x - l2.x) ** 2 + (l1.y - l2.y) ** 2 + (l1.z - l2.z) ** 2);
-    }, 0);
-  };
+  // const calculateDistance = (landmarks1: Landmark[], landmarks2: Landmark[]): number => {
+  //   if (landmarks1.length !== landmarks2.length) return Infinity;
+  //   return landmarks1.reduce((sum, l1, i) => {
+  //     const l2 = landmarks2[i];
+  //     return sum + Math.sqrt((l1.x - l2.x) ** 2 + (l1.y - l2.y) ** 2 + (l1.z - l2.z) ** 2);
+  //   }, 0);
+  // };
 
   /**
    * Finds the index of the frame with the closest left and right landmarks to the given frame.
    */
-  const findClosestFrame = (frames: Frame[], newFrame: Frame): number => {
-    let minDistance = Infinity;
-    let closestIndex = -1;
+  // const findClosestFrame = (frames: Frame[], newFrame: Frame): number => {
+  //   let minDistance = Infinity;
+  //   let closestIndex = -1;
 
-    frames.forEach((frame, index) => {
-      const leftDistance = calculateDistance(frame.left, newFrame.left);
-      const rightDistance = calculateDistance(frame.right, newFrame.right);
-      const totalDistance = leftDistance + rightDistance;
+  //   frames.forEach((frame, index) => {
+  //     const leftDistance = calculateDistance(frame.left, newFrame.left);
+  //     const rightDistance = calculateDistance(frame.right, newFrame.right);
+  //     const totalDistance = leftDistance + rightDistance;
 
-      if (totalDistance < minDistance) {
-        minDistance = totalDistance;
-        closestIndex = index;
-      }
-    });
+  //     if (totalDistance < minDistance) {
+  //       minDistance = totalDistance;
+  //       closestIndex = index;
+  //     }
+  //   });
 
-    return closestIndex;
-  };
+  //   return closestIndex;
+  // };
 
 
   const onResults = (results: Results) => {

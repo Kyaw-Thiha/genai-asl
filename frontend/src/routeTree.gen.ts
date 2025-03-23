@@ -17,10 +17,10 @@ import { Route as HolisticImport } from './routes/holistic'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as UnitsIndexImport } from './routes/units/index'
-import { Route as WordsAImport } from './routes/words/a'
 import { Route as UnitsIntroIndexImport } from './routes/units/intro/index'
 import { Route as UnitsFruitsIndexImport } from './routes/units/fruits/index'
 import { Route as UnitsColoursIndexImport } from './routes/units/colours/index'
+import { Route as UnitsIntroPleaseImport } from './routes/units/intro/please'
 import { Route as UnitsIntroHelloImport } from './routes/units/intro/hello'
 
 // Create/Update Routes
@@ -61,12 +61,6 @@ const UnitsIndexRoute = UnitsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const WordsARoute = WordsAImport.update({
-  id: '/words/a',
-  path: '/words/a',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const UnitsIntroIndexRoute = UnitsIntroIndexImport.update({
   id: '/units/intro/',
   path: '/units/intro/',
@@ -82,6 +76,12 @@ const UnitsFruitsIndexRoute = UnitsFruitsIndexImport.update({
 const UnitsColoursIndexRoute = UnitsColoursIndexImport.update({
   id: '/units/colours/',
   path: '/units/colours/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnitsIntroPleaseRoute = UnitsIntroPleaseImport.update({
+  id: '/units/intro/please',
+  path: '/units/intro/please',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -130,13 +130,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Holistic1Import
       parentRoute: typeof rootRoute
     }
-    '/words/a': {
-      id: '/words/a'
-      path: '/words/a'
-      fullPath: '/words/a'
-      preLoaderRoute: typeof WordsAImport
-      parentRoute: typeof rootRoute
-    }
     '/units/': {
       id: '/units/'
       path: '/units'
@@ -149,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/units/intro/hello'
       fullPath: '/units/intro/hello'
       preLoaderRoute: typeof UnitsIntroHelloImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/intro/please': {
+      id: '/units/intro/please'
+      path: '/units/intro/please'
+      fullPath: '/units/intro/please'
+      preLoaderRoute: typeof UnitsIntroPleaseImport
       parentRoute: typeof rootRoute
     }
     '/units/colours/': {
@@ -183,9 +183,9 @@ export interface FileRoutesByFullPath {
   '/holistic': typeof HolisticRoute
   '/holistic-old': typeof HolisticOldRoute
   '/holistic_1': typeof Holistic1Route
-  '/words/a': typeof WordsARoute
   '/units': typeof UnitsIndexRoute
   '/units/intro/hello': typeof UnitsIntroHelloRoute
+  '/units/intro/please': typeof UnitsIntroPleaseRoute
   '/units/colours': typeof UnitsColoursIndexRoute
   '/units/fruits': typeof UnitsFruitsIndexRoute
   '/units/intro': typeof UnitsIntroIndexRoute
@@ -197,9 +197,9 @@ export interface FileRoutesByTo {
   '/holistic': typeof HolisticRoute
   '/holistic-old': typeof HolisticOldRoute
   '/holistic_1': typeof Holistic1Route
-  '/words/a': typeof WordsARoute
   '/units': typeof UnitsIndexRoute
   '/units/intro/hello': typeof UnitsIntroHelloRoute
+  '/units/intro/please': typeof UnitsIntroPleaseRoute
   '/units/colours': typeof UnitsColoursIndexRoute
   '/units/fruits': typeof UnitsFruitsIndexRoute
   '/units/intro': typeof UnitsIntroIndexRoute
@@ -212,9 +212,9 @@ export interface FileRoutesById {
   '/holistic': typeof HolisticRoute
   '/holistic-old': typeof HolisticOldRoute
   '/holistic_1': typeof Holistic1Route
-  '/words/a': typeof WordsARoute
   '/units/': typeof UnitsIndexRoute
   '/units/intro/hello': typeof UnitsIntroHelloRoute
+  '/units/intro/please': typeof UnitsIntroPleaseRoute
   '/units/colours/': typeof UnitsColoursIndexRoute
   '/units/fruits/': typeof UnitsFruitsIndexRoute
   '/units/intro/': typeof UnitsIntroIndexRoute
@@ -228,9 +228,9 @@ export interface FileRouteTypes {
     | '/holistic'
     | '/holistic-old'
     | '/holistic_1'
-    | '/words/a'
     | '/units'
     | '/units/intro/hello'
+    | '/units/intro/please'
     | '/units/colours'
     | '/units/fruits'
     | '/units/intro'
@@ -241,9 +241,9 @@ export interface FileRouteTypes {
     | '/holistic'
     | '/holistic-old'
     | '/holistic_1'
-    | '/words/a'
     | '/units'
     | '/units/intro/hello'
+    | '/units/intro/please'
     | '/units/colours'
     | '/units/fruits'
     | '/units/intro'
@@ -254,9 +254,9 @@ export interface FileRouteTypes {
     | '/holistic'
     | '/holistic-old'
     | '/holistic_1'
-    | '/words/a'
     | '/units/'
     | '/units/intro/hello'
+    | '/units/intro/please'
     | '/units/colours/'
     | '/units/fruits/'
     | '/units/intro/'
@@ -269,9 +269,9 @@ export interface RootRouteChildren {
   HolisticRoute: typeof HolisticRoute
   HolisticOldRoute: typeof HolisticOldRoute
   Holistic1Route: typeof Holistic1Route
-  WordsARoute: typeof WordsARoute
   UnitsIndexRoute: typeof UnitsIndexRoute
   UnitsIntroHelloRoute: typeof UnitsIntroHelloRoute
+  UnitsIntroPleaseRoute: typeof UnitsIntroPleaseRoute
   UnitsColoursIndexRoute: typeof UnitsColoursIndexRoute
   UnitsFruitsIndexRoute: typeof UnitsFruitsIndexRoute
   UnitsIntroIndexRoute: typeof UnitsIntroIndexRoute
@@ -283,9 +283,9 @@ const rootRouteChildren: RootRouteChildren = {
   HolisticRoute: HolisticRoute,
   HolisticOldRoute: HolisticOldRoute,
   Holistic1Route: Holistic1Route,
-  WordsARoute: WordsARoute,
   UnitsIndexRoute: UnitsIndexRoute,
   UnitsIntroHelloRoute: UnitsIntroHelloRoute,
+  UnitsIntroPleaseRoute: UnitsIntroPleaseRoute,
   UnitsColoursIndexRoute: UnitsColoursIndexRoute,
   UnitsFruitsIndexRoute: UnitsFruitsIndexRoute,
   UnitsIntroIndexRoute: UnitsIntroIndexRoute,
@@ -306,9 +306,9 @@ export const routeTree = rootRoute
         "/holistic",
         "/holistic-old",
         "/holistic_1",
-        "/words/a",
         "/units/",
         "/units/intro/hello",
+        "/units/intro/please",
         "/units/colours/",
         "/units/fruits/",
         "/units/intro/"
@@ -329,14 +329,14 @@ export const routeTree = rootRoute
     "/holistic_1": {
       "filePath": "holistic_1.tsx"
     },
-    "/words/a": {
-      "filePath": "words/a.tsx"
-    },
     "/units/": {
       "filePath": "units/index.tsx"
     },
     "/units/intro/hello": {
       "filePath": "units/intro/hello.tsx"
+    },
+    "/units/intro/please": {
+      "filePath": "units/intro/please.tsx"
     },
     "/units/colours/": {
       "filePath": "units/colours/index.tsx"

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import { createFileRoute } from '@tanstack/react-router'
 import { Camera } from "@mediapipe/camera_utils";
-import { FACEMESH_TESSELATION, HAND_CONNECTIONS, POSE_CONNECTIONS, Holistic, Results } from '@mediapipe/holistic';
+import { HAND_CONNECTIONS, POSE_CONNECTIONS, Holistic, Results } from '@mediapipe/holistic';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils'
 
 
