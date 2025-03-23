@@ -18,10 +18,10 @@ import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as UnitsIndexImport } from './routes/units/index'
 import { Route as WordsAImport } from './routes/words/a'
-import { Route as UnitsNumbersImport } from './routes/units/numbers'
-import { Route as UnitsIntroImport } from './routes/units/intro'
-import { Route as UnitsColoursImport } from './routes/units/colours'
-import { Route as UnitsAlphabetsImport } from './routes/units/alphabets'
+import { Route as UnitsIntroIndexImport } from './routes/units/intro/index'
+import { Route as UnitsFruitsIndexImport } from './routes/units/fruits/index'
+import { Route as UnitsColoursIndexImport } from './routes/units/colours/index'
+import { Route as UnitsIntroHelloImport } from './routes/units/intro/hello'
 
 // Create/Update Routes
 
@@ -67,27 +67,27 @@ const WordsARoute = WordsAImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const UnitsNumbersRoute = UnitsNumbersImport.update({
-  id: '/units/numbers',
-  path: '/units/numbers',
+const UnitsIntroIndexRoute = UnitsIntroIndexImport.update({
+  id: '/units/intro/',
+  path: '/units/intro/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const UnitsIntroRoute = UnitsIntroImport.update({
-  id: '/units/intro',
-  path: '/units/intro',
+const UnitsFruitsIndexRoute = UnitsFruitsIndexImport.update({
+  id: '/units/fruits/',
+  path: '/units/fruits/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const UnitsColoursRoute = UnitsColoursImport.update({
-  id: '/units/colours',
-  path: '/units/colours',
+const UnitsColoursIndexRoute = UnitsColoursIndexImport.update({
+  id: '/units/colours/',
+  path: '/units/colours/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const UnitsAlphabetsRoute = UnitsAlphabetsImport.update({
-  id: '/units/alphabets',
-  path: '/units/alphabets',
+const UnitsIntroHelloRoute = UnitsIntroHelloImport.update({
+  id: '/units/intro/hello',
+  path: '/units/intro/hello',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -130,34 +130,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Holistic1Import
       parentRoute: typeof rootRoute
     }
-    '/units/alphabets': {
-      id: '/units/alphabets'
-      path: '/units/alphabets'
-      fullPath: '/units/alphabets'
-      preLoaderRoute: typeof UnitsAlphabetsImport
-      parentRoute: typeof rootRoute
-    }
-    '/units/colours': {
-      id: '/units/colours'
-      path: '/units/colours'
-      fullPath: '/units/colours'
-      preLoaderRoute: typeof UnitsColoursImport
-      parentRoute: typeof rootRoute
-    }
-    '/units/intro': {
-      id: '/units/intro'
-      path: '/units/intro'
-      fullPath: '/units/intro'
-      preLoaderRoute: typeof UnitsIntroImport
-      parentRoute: typeof rootRoute
-    }
-    '/units/numbers': {
-      id: '/units/numbers'
-      path: '/units/numbers'
-      fullPath: '/units/numbers'
-      preLoaderRoute: typeof UnitsNumbersImport
-      parentRoute: typeof rootRoute
-    }
     '/words/a': {
       id: '/words/a'
       path: '/words/a'
@@ -172,6 +144,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnitsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/units/intro/hello': {
+      id: '/units/intro/hello'
+      path: '/units/intro/hello'
+      fullPath: '/units/intro/hello'
+      preLoaderRoute: typeof UnitsIntroHelloImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/colours/': {
+      id: '/units/colours/'
+      path: '/units/colours'
+      fullPath: '/units/colours'
+      preLoaderRoute: typeof UnitsColoursIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/fruits/': {
+      id: '/units/fruits/'
+      path: '/units/fruits'
+      fullPath: '/units/fruits'
+      preLoaderRoute: typeof UnitsFruitsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/units/intro/': {
+      id: '/units/intro/'
+      path: '/units/intro'
+      fullPath: '/units/intro'
+      preLoaderRoute: typeof UnitsIntroIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -183,12 +183,12 @@ export interface FileRoutesByFullPath {
   '/holistic': typeof HolisticRoute
   '/holistic-old': typeof HolisticOldRoute
   '/holistic_1': typeof Holistic1Route
-  '/units/alphabets': typeof UnitsAlphabetsRoute
-  '/units/colours': typeof UnitsColoursRoute
-  '/units/intro': typeof UnitsIntroRoute
-  '/units/numbers': typeof UnitsNumbersRoute
   '/words/a': typeof WordsARoute
   '/units': typeof UnitsIndexRoute
+  '/units/intro/hello': typeof UnitsIntroHelloRoute
+  '/units/colours': typeof UnitsColoursIndexRoute
+  '/units/fruits': typeof UnitsFruitsIndexRoute
+  '/units/intro': typeof UnitsIntroIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -197,12 +197,12 @@ export interface FileRoutesByTo {
   '/holistic': typeof HolisticRoute
   '/holistic-old': typeof HolisticOldRoute
   '/holistic_1': typeof Holistic1Route
-  '/units/alphabets': typeof UnitsAlphabetsRoute
-  '/units/colours': typeof UnitsColoursRoute
-  '/units/intro': typeof UnitsIntroRoute
-  '/units/numbers': typeof UnitsNumbersRoute
   '/words/a': typeof WordsARoute
   '/units': typeof UnitsIndexRoute
+  '/units/intro/hello': typeof UnitsIntroHelloRoute
+  '/units/colours': typeof UnitsColoursIndexRoute
+  '/units/fruits': typeof UnitsFruitsIndexRoute
+  '/units/intro': typeof UnitsIntroIndexRoute
 }
 
 export interface FileRoutesById {
@@ -212,12 +212,12 @@ export interface FileRoutesById {
   '/holistic': typeof HolisticRoute
   '/holistic-old': typeof HolisticOldRoute
   '/holistic_1': typeof Holistic1Route
-  '/units/alphabets': typeof UnitsAlphabetsRoute
-  '/units/colours': typeof UnitsColoursRoute
-  '/units/intro': typeof UnitsIntroRoute
-  '/units/numbers': typeof UnitsNumbersRoute
   '/words/a': typeof WordsARoute
   '/units/': typeof UnitsIndexRoute
+  '/units/intro/hello': typeof UnitsIntroHelloRoute
+  '/units/colours/': typeof UnitsColoursIndexRoute
+  '/units/fruits/': typeof UnitsFruitsIndexRoute
+  '/units/intro/': typeof UnitsIntroIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -228,12 +228,12 @@ export interface FileRouteTypes {
     | '/holistic'
     | '/holistic-old'
     | '/holistic_1'
-    | '/units/alphabets'
-    | '/units/colours'
-    | '/units/intro'
-    | '/units/numbers'
     | '/words/a'
     | '/units'
+    | '/units/intro/hello'
+    | '/units/colours'
+    | '/units/fruits'
+    | '/units/intro'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -241,12 +241,12 @@ export interface FileRouteTypes {
     | '/holistic'
     | '/holistic-old'
     | '/holistic_1'
-    | '/units/alphabets'
-    | '/units/colours'
-    | '/units/intro'
-    | '/units/numbers'
     | '/words/a'
     | '/units'
+    | '/units/intro/hello'
+    | '/units/colours'
+    | '/units/fruits'
+    | '/units/intro'
   id:
     | '__root__'
     | '/'
@@ -254,12 +254,12 @@ export interface FileRouteTypes {
     | '/holistic'
     | '/holistic-old'
     | '/holistic_1'
-    | '/units/alphabets'
-    | '/units/colours'
-    | '/units/intro'
-    | '/units/numbers'
     | '/words/a'
     | '/units/'
+    | '/units/intro/hello'
+    | '/units/colours/'
+    | '/units/fruits/'
+    | '/units/intro/'
   fileRoutesById: FileRoutesById
 }
 
@@ -269,12 +269,12 @@ export interface RootRouteChildren {
   HolisticRoute: typeof HolisticRoute
   HolisticOldRoute: typeof HolisticOldRoute
   Holistic1Route: typeof Holistic1Route
-  UnitsAlphabetsRoute: typeof UnitsAlphabetsRoute
-  UnitsColoursRoute: typeof UnitsColoursRoute
-  UnitsIntroRoute: typeof UnitsIntroRoute
-  UnitsNumbersRoute: typeof UnitsNumbersRoute
   WordsARoute: typeof WordsARoute
   UnitsIndexRoute: typeof UnitsIndexRoute
+  UnitsIntroHelloRoute: typeof UnitsIntroHelloRoute
+  UnitsColoursIndexRoute: typeof UnitsColoursIndexRoute
+  UnitsFruitsIndexRoute: typeof UnitsFruitsIndexRoute
+  UnitsIntroIndexRoute: typeof UnitsIntroIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -283,12 +283,12 @@ const rootRouteChildren: RootRouteChildren = {
   HolisticRoute: HolisticRoute,
   HolisticOldRoute: HolisticOldRoute,
   Holistic1Route: Holistic1Route,
-  UnitsAlphabetsRoute: UnitsAlphabetsRoute,
-  UnitsColoursRoute: UnitsColoursRoute,
-  UnitsIntroRoute: UnitsIntroRoute,
-  UnitsNumbersRoute: UnitsNumbersRoute,
   WordsARoute: WordsARoute,
   UnitsIndexRoute: UnitsIndexRoute,
+  UnitsIntroHelloRoute: UnitsIntroHelloRoute,
+  UnitsColoursIndexRoute: UnitsColoursIndexRoute,
+  UnitsFruitsIndexRoute: UnitsFruitsIndexRoute,
+  UnitsIntroIndexRoute: UnitsIntroIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -306,12 +306,12 @@ export const routeTree = rootRoute
         "/holistic",
         "/holistic-old",
         "/holistic_1",
-        "/units/alphabets",
-        "/units/colours",
-        "/units/intro",
-        "/units/numbers",
         "/words/a",
-        "/units/"
+        "/units/",
+        "/units/intro/hello",
+        "/units/colours/",
+        "/units/fruits/",
+        "/units/intro/"
       ]
     },
     "/": {
@@ -329,23 +329,23 @@ export const routeTree = rootRoute
     "/holistic_1": {
       "filePath": "holistic_1.tsx"
     },
-    "/units/alphabets": {
-      "filePath": "units/alphabets.tsx"
-    },
-    "/units/colours": {
-      "filePath": "units/colours.tsx"
-    },
-    "/units/intro": {
-      "filePath": "units/intro.tsx"
-    },
-    "/units/numbers": {
-      "filePath": "units/numbers.tsx"
-    },
     "/words/a": {
       "filePath": "words/a.tsx"
     },
     "/units/": {
       "filePath": "units/index.tsx"
+    },
+    "/units/intro/hello": {
+      "filePath": "units/intro/hello.tsx"
+    },
+    "/units/colours/": {
+      "filePath": "units/colours/index.tsx"
+    },
+    "/units/fruits/": {
+      "filePath": "units/fruits/index.tsx"
+    },
+    "/units/intro/": {
+      "filePath": "units/intro/index.tsx"
     }
   }
 }
