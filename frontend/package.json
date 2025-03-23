@@ -27,6 +27,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.483.0",
+    "node-pickle": "^0.0.2",
+    "picklejs": "^0.101.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-webcam": "^7.2.0",
