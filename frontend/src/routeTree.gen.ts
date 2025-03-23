@@ -11,6 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as Holistic1Import } from './routes/holistic_1'
+import { Route as HolisticImport } from './routes/holistic'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as UnitsIndexImport } from './routes/units/index'
@@ -21,6 +23,18 @@ import { Route as UnitsColoursImport } from './routes/units/colours'
 import { Route as UnitsAlphabetsImport } from './routes/units/alphabets'
 
 // Create/Update Routes
+
+const Holistic1Route = Holistic1Import.update({
+  id: '/holistic_1',
+  path: '/holistic_1',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HolisticRoute = HolisticImport.update({
+  id: '/holistic',
+  path: '/holistic',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -88,6 +102,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/holistic': {
+      id: '/holistic'
+      path: '/holistic'
+      fullPath: '/holistic'
+      preLoaderRoute: typeof HolisticImport
+      parentRoute: typeof rootRoute
+    }
+    '/holistic_1': {
+      id: '/holistic_1'
+      path: '/holistic_1'
+      fullPath: '/holistic_1'
+      preLoaderRoute: typeof Holistic1Import
+      parentRoute: typeof rootRoute
+    }
     '/units/alphabets': {
       id: '/units/alphabets'
       path: '/units/alphabets'
@@ -138,6 +166,8 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/holistic': typeof HolisticRoute
+  '/holistic_1': typeof Holistic1Route
   '/units/alphabets': typeof UnitsAlphabetsRoute
   '/units/colours': typeof UnitsColoursRoute
   '/units/intro': typeof UnitsIntroRoute
@@ -149,6 +179,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/holistic': typeof HolisticRoute
+  '/holistic_1': typeof Holistic1Route
   '/units/alphabets': typeof UnitsAlphabetsRoute
   '/units/colours': typeof UnitsColoursRoute
   '/units/intro': typeof UnitsIntroRoute
@@ -161,6 +193,8 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/holistic': typeof HolisticRoute
+  '/holistic_1': typeof Holistic1Route
   '/units/alphabets': typeof UnitsAlphabetsRoute
   '/units/colours': typeof UnitsColoursRoute
   '/units/intro': typeof UnitsIntroRoute
@@ -174,6 +208,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/holistic'
+    | '/holistic_1'
     | '/units/alphabets'
     | '/units/colours'
     | '/units/intro'
@@ -184,6 +220,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/holistic'
+    | '/holistic_1'
     | '/units/alphabets'
     | '/units/colours'
     | '/units/intro'
@@ -194,6 +232,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/holistic'
+    | '/holistic_1'
     | '/units/alphabets'
     | '/units/colours'
     | '/units/intro'
@@ -206,6 +246,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  HolisticRoute: typeof HolisticRoute
+  Holistic1Route: typeof Holistic1Route
   UnitsAlphabetsRoute: typeof UnitsAlphabetsRoute
   UnitsColoursRoute: typeof UnitsColoursRoute
   UnitsIntroRoute: typeof UnitsIntroRoute
@@ -217,6 +259,8 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  HolisticRoute: HolisticRoute,
+  Holistic1Route: Holistic1Route,
   UnitsAlphabetsRoute: UnitsAlphabetsRoute,
   UnitsColoursRoute: UnitsColoursRoute,
   UnitsIntroRoute: UnitsIntroRoute,
@@ -237,6 +281,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/holistic",
+        "/holistic_1",
         "/units/alphabets",
         "/units/colours",
         "/units/intro",
@@ -250,6 +296,12 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/holistic": {
+      "filePath": "holistic.tsx"
+    },
+    "/holistic_1": {
+      "filePath": "holistic_1.tsx"
     },
     "/units/alphabets": {
       "filePath": "units/alphabets.tsx"
