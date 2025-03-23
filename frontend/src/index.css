@@ -51,10 +51,7 @@
 }
 
 
-body {
-  /*margin: 0;*/
-  /*display: flex;*/
-  /*place-items: center;*/
+/* body {
   min-width: 320px;
   min-height: 100vh;
 }
@@ -175,4 +172,4 @@ button:focus-visible {
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
