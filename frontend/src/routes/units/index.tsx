@@ -17,11 +17,10 @@ export const Route = createFileRoute("/units/")({
 function Units() {
   return (
     <div className="p-2">
-      <h1 className="text-xl font-bold mb-4">Units</h1>
-      <Button>Hey there</Button>
+      <h1 className="text-xl ml-4 my-4">Units</h1>
 
-      <div className="flex items-center justify-center">
-        <Accordion className="w-[80vw]" type="single" collapsible>
+      <div className="flex items-center justify-center mt-8">
+        <Accordion className="w-[90vw]" type="single" collapsible>
           {/* Unit 1: Introduction */}
           <AccordionItem value="unit1">
             <AccordionTrigger>Unit 1: Introduction</AccordionTrigger>

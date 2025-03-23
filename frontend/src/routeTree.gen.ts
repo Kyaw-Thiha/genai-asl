@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as UnitsIndexImport } from './routes/units/index'
+import { Route as WordsAImport } from './routes/words/a'
 import { Route as UnitsNumbersImport } from './routes/units/numbers'
 import { Route as UnitsIntroImport } from './routes/units/intro'
 import { Route as UnitsColoursImport } from './routes/units/colours'
@@ -36,6 +37,12 @@ const IndexRoute = IndexImport.update({
 const UnitsIndexRoute = UnitsIndexImport.update({
   id: '/units/',
   path: '/units/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const WordsARoute = WordsAImport.update({
+  id: '/words/a',
+  path: '/words/a',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -109,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnitsNumbersImport
       parentRoute: typeof rootRoute
     }
+    '/words/a': {
+      id: '/words/a'
+      path: '/words/a'
+      fullPath: '/words/a'
+      preLoaderRoute: typeof WordsAImport
+      parentRoute: typeof rootRoute
+    }
     '/units/': {
       id: '/units/'
       path: '/units'
@@ -128,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/units/colours': typeof UnitsColoursRoute
   '/units/intro': typeof UnitsIntroRoute
   '/units/numbers': typeof UnitsNumbersRoute
+  '/words/a': typeof WordsARoute
   '/units': typeof UnitsIndexRoute
 }
 
@@ -138,6 +153,7 @@ export interface FileRoutesByTo {
   '/units/colours': typeof UnitsColoursRoute
   '/units/intro': typeof UnitsIntroRoute
   '/units/numbers': typeof UnitsNumbersRoute
+  '/words/a': typeof WordsARoute
   '/units': typeof UnitsIndexRoute
 }
 
@@ -149,6 +165,7 @@ export interface FileRoutesById {
   '/units/colours': typeof UnitsColoursRoute
   '/units/intro': typeof UnitsIntroRoute
   '/units/numbers': typeof UnitsNumbersRoute
+  '/words/a': typeof WordsARoute
   '/units/': typeof UnitsIndexRoute
 }
 
@@ -161,6 +178,7 @@ export interface FileRouteTypes {
     | '/units/colours'
     | '/units/intro'
     | '/units/numbers'
+    | '/words/a'
     | '/units'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -170,6 +188,7 @@ export interface FileRouteTypes {
     | '/units/colours'
     | '/units/intro'
     | '/units/numbers'
+    | '/words/a'
     | '/units'
   id:
     | '__root__'
@@ -179,6 +198,7 @@ export interface FileRouteTypes {
     | '/units/colours'
     | '/units/intro'
     | '/units/numbers'
+    | '/words/a'
     | '/units/'
   fileRoutesById: FileRoutesById
 }
@@ -190,6 +210,7 @@ export interface RootRouteChildren {
   UnitsColoursRoute: typeof UnitsColoursRoute
   UnitsIntroRoute: typeof UnitsIntroRoute
   UnitsNumbersRoute: typeof UnitsNumbersRoute
+  WordsARoute: typeof WordsARoute
   UnitsIndexRoute: typeof UnitsIndexRoute
 }
 
@@ -200,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnitsColoursRoute: UnitsColoursRoute,
   UnitsIntroRoute: UnitsIntroRoute,
   UnitsNumbersRoute: UnitsNumbersRoute,
+  WordsARoute: WordsARoute,
   UnitsIndexRoute: UnitsIndexRoute,
 }
 
@@ -219,6 +241,7 @@ export const routeTree = rootRoute
         "/units/colours",
         "/units/intro",
         "/units/numbers",
+        "/words/a",
         "/units/"
       ]
     },
@@ -239,6 +262,9 @@ export const routeTree = rootRoute
     },
     "/units/numbers": {
       "filePath": "units/numbers.tsx"
+    },
+    "/words/a": {
+      "filePath": "words/a.tsx"
     },
     "/units/": {
       "filePath": "units/index.tsx"
